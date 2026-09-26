@@ -11,8 +11,13 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 
-from dataclasses import dataclass #makes it easier to create classes that mainly store data/configuration.
-                    #Instead of writing a lot of boilerplate code, dataclass automatically creates things like the constructor.
+from dataclasses import dataclass #makes it easier to create classes that mainly store data/configuration.#Instead of writing a lot of boilerplate code, dataclass automatically creates things like the constructor.
+
+from src.Components.data_transformation import DataTransformation
+from src.Components.data_transformation import DataTransformationConfig
+
+#from src.Components.model_trainer import ModelTrainerConfig
+#from src.Components.model_trainer import ModelTrainer
 
 #Creating DataIngestionConfig
 @dataclass#The @dataclass tells Python:This class is mainly going to store configuration values.(Decorator function)
@@ -60,6 +65,9 @@ class DataIngestion: #This class contains the actual logic for bringing the data
 #Main block
 if __name__=="__main__":#Run the following code only when this Python file is executed directly
     obj = DataIngestion()#Create DataIngestion object:This creates an object from your class
-    obj.initiate_data_ingestion()
+    train_data,test_data=obj.initiate_data_ingestion()
+
+    data_transformation=DataTransformation()
+    data_transformation.initiate_data_transformation(train_data,test_data)
 
         
