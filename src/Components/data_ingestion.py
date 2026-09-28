@@ -16,8 +16,8 @@ from dataclasses import dataclass #makes it easier to create classes that mainly
 from src.Components.data_transformation import DataTransformation
 from src.Components.data_transformation import DataTransformationConfig
 
-#from src.Components.model_trainer import ModelTrainerConfig
-#from src.Components.model_trainer import ModelTrainer
+from src.Components.model_trainer import ModelTrainerConfig
+from src.Components.model_trainer import ModelTrainer
 
 #Creating DataIngestionConfig
 @dataclass#The @dataclass tells Python:This class is mainly going to store configuration values.(Decorator function)
@@ -68,6 +68,9 @@ if __name__=="__main__":#Run the following code only when this Python file is ex
     train_data,test_data=obj.initiate_data_ingestion()
 
     data_transformation=DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+
+    modeltrainer=ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
 
         
